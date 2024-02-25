@@ -9,7 +9,7 @@ const Profile = () => {
           <div className="row">
             <h4 className="font-weight-bold mt-0 mb-4">My Profile</h4>
             <div className="col-lg-12 mb-4 bg-white card shadow-sm">
-              <div className="card card-style1 border-0">
+              <div className="card card-style1 border-2">
                 <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                   <div className="row align-items-center">
                     <div className="col-lg-4 mb-4 mb-lg-0">

@@ -1,5 +1,4 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Checkout from "./pages/checkuot/Checkout";
@@ -12,8 +11,6 @@ import Kids from "./pages/kids/Kids";
 import Mens from "./pages/mens/Mens";
 import Womens from "./pages/womens/Womens";
 import { BrowserRouter as Routers, Routes, Route, useLocation } from "react-router-dom";
-import Header from "./layout/header/Header";
-import Footer from "./layout/footer/Footer";
 import User from "./pages/user-profile/User";
 import Return_Policy from "./pages/return-policy/Return_Policy";
 import Bot from "./pages/bot/Bot";

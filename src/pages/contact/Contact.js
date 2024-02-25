@@ -51,35 +51,35 @@ function App() {
                         <div className="col-sm-6 mb-3">
                             <div className="form-group">
                                 <label className="required-field" for="firstName">First Name</label>
-                                <input type="text" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="First Name"/>
+                                <input type="text" className="block w-full rounded-md border-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="First Name"/>
                             </div>
                         </div>
     
                         <div className="col-sm-6 mb-3">
                             <div className="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="Last Name"/>
+                                <input type="text" className="block w-full rounded-md border-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="Last Name"/>
                             </div>
                         </div>
     
                         <div className="col-sm-6 mb-3">
                             <div className="form-group">
                                 <label className="required-field" for="email">Email</label>
-                                <input type="email" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="example@xyz.com"/>
+                                <input type="email" className="block w-full rounded-md border-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="example@xyz.com"/>
                             </div>
                         </div>
     
                         <div className="col-sm-6 mb-3">
                             <div className="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="+92 303 2664863"/>
+                                <input type="tel" className="block w-full rounded-md border-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" placeholder="+92 303 2664863"/>
                             </div>
                         </div>
     
                         <div className="col-sm-12 mb-3">
                             <div className="form-group">
                                 <label className="required-field" for="message">How can we help?</label>
-                                <textarea className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" id="message" name="message" rows="4" placeholder="Hi there, I would like to....."></textarea>
+                                <textarea className="block w-full rounded-md border-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" id="message" name="message" rows="4" placeholder="Hi there, I would like to....."></textarea>
                             </div>
                         </div>
     

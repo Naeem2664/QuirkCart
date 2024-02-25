@@ -10,11 +10,13 @@ import {
 } from "@heroicons/react/20/solid";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/slices/cartSlice";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 const products = [
   {
     id: 1,
     name: "Earthen Bottle",
-    href: "#",
     price: "$48",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
@@ -264,6 +266,10 @@ function classNames(...classNamees) {
 
 export default function ProductList(props) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const dispatch = useDispatch();
+  const handleAddtocart=(quantity=1)=>{
+    dispatch(addToCart({...products,quantity}))
+  }
 
   return (
     <>
@@ -286,7 +292,7 @@ export default function ProductList(props) {
                   <div className="col">
                     <input
                       type="text"
-                      className="block w-full rounded-md border-0 py-2 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border-2 py-2 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                       placeholder="Search Products"
                     />
                   </div>
@@ -561,11 +567,8 @@ export default function ProductList(props) {
 
                       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                         {products.map((product) => (
-                          <a
-                            key={product.id}
-                            href={product.href}
-                            className="group"
-                          >
+                          <div key={product.id}>
+                          <Link to='/products/:id'>
                             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                               <img
                                 src={product.imageSrc}
@@ -573,13 +576,26 @@ export default function ProductList(props) {
                                 className="h-full w-full object-cover object-center group-hover:opacity-75"
                               />
                             </div>
+                            </Link>
                             <h3 className="mt-4 text-sm text-gray-700">
                               {product.name}
                             </h3>
-                            <p className="mt-1 text-lg font-medium text-gray-900">
+                            <p className="mt-1 text-lg block font-medium text-gray-900">
                               {product.price}
                             </p>
-                          </a>
+                            <button
+                              className="text-white p-2 text-center mr-1 rounded bg-gray-950 hover:bg-gray-700">
+
+                              <h6 >Buy Now</h6> 
+                            </button>
+                            <button
+                              className="text-white p-2 text-center rounded ml-1 bg-gray-950 hover:bg-gray-700"
+                              onClick={(quantity=1)=>dispatch(addToCart({...product,quantity}))}
+                            >
+
+                              <h6 >Add to cart</h6> 
+                            </button>
+                            </div>
                         ))}
                       </div>
                     </div>

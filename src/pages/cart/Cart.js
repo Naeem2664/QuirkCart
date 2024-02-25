@@ -1,12 +1,14 @@
 import React from 'react';
 import './style.css';
-
+import {useSelector,useDispatch} from 'react-redux'
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
-
-
+import { HiPlus,HiMinus } from 'react-icons/hi';
+import { decrementQuantity, incrementQuantity, removeItem } from '../../features/slices/cartSlice';
 function Cart() {
-  
+  const cart=useSelector((state)=>state.cart)
+  const totalAmount=useSelector((state)=>state.cart.totalAmount)
+  const dispatch=useDispatch()
 	return (
 		<div>
 			<div className="container px-3 my-5 m-5">
@@ -25,28 +27,31 @@ function Cart() {
                   </tr>
                 </thead>
                 <tbody>
-        
-                  <tr>
-                    <td className="p-4">
-                      <div className="media align-items-center">
-                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg" className="d-block ui-w-40 ui-bordered mr-4" alt=""/>
-                        <div className="media-body">
-                          <a href="#/" className="d-block text-dark">Product 1</a>
-                          <small>
-                            <span className="text-muted">Size: </span> EU 37 &nbsp;
-                            <span className="text-muted">Ships from: </span> China
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-right font-weight-semibold align-middle p-4">$57.55</td>
-                    <td className="align-middle p-4">
-                      <input type="text" className="block rounded-md border-0 p-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                      placeholder="Quantity"
-                    /></td>
-                    <td className="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                    <td className="text-center align-middle p-2"><button><RiDeleteBin2Line className='text-gray-950 hover:text-gray-600'></RiDeleteBin2Line></button> </td>
-                  </tr>
+        {cart.map((item)=>{
+          return (
+            <tr>
+            <td className="p-4">
+              <div className="media align-items-center">
+                <img src={item.imageSrc} className="d-block ui-w-40 ui-bordered mr-4" alt={item.imageAlt}/>
+                <div className="media-body">
+                  <a href="#/" className="d-block text-dark">{item.name}</a>
+                </div>
+              </div>
+            </td>
+            <td className="text-right font-weight-semibold align-middle p-4">{item.price}</td>
+            <td className="align-middle p-1">
+              <button onClick={()=>dispatch(incrementQuantity(item.id))}> <HiPlus /></button>
+            <span><h5>{item.quantity}</h5></span>
+            <button onClick={()=>dispatch(decrementQuantity(item.id))}> <HiMinus/></button>
+            </td>
+            <td className="text-right font-weight-semibold align-middle p-4">{item.totalAmount}</td>
+            <td className="text-center align-middle p-2"><button onClick={()=>dispatch(removeItem(item.id))}><RiDeleteBin2Line className='text-gray-950 hover:text-gray-600'></RiDeleteBin2Line></button> </td>
+          </tr>
+          )
+        })}
+         
+          
+                  
                 </tbody>
               </table>
             </div>
@@ -55,7 +60,7 @@ function Cart() {
             <div className="d-flex flex-wrap justify-content-between align-items-center pb-4">
               <div className="mt-4">
                 <label className="text-muted font-weight-normal">Promocode</label>
-                <input type="text" className="block rounded-md border-0 p-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                <input type="text" className="block rounded-md border-2 p-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                       placeholder="ABC"
                     />
               </div>
@@ -65,8 +70,8 @@ function Cart() {
                   <div className="text-large"><strong>$20</strong></div>
                 </div>
                 <div className="text-right mt-4">
-                  <label className="text-muted font-weight-normal m-0">Total price</label>
-                  <div className="text-large"><strong>$1164.65</strong></div>
+                  <label className="text-muted font-weight-normal m-0">Total Amount</label>
+                  <div className="text-large"><strong>{totalAmount}</strong></div>
                 </div>
               </div>
             </div>
