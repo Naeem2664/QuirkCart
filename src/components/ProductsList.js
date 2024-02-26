@@ -10,211 +10,10 @@ import {
 } from "@heroicons/react/20/solid";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addToCart } from "../features/slices/cartSlice";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-const products = [
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  // More products...
-];
+import React, { useEffect } from 'react';
+import { fetchProductsThunk } from "../features/slices/productSlice";
 const sortOptions = [
   { name: "Most Popular", to: "", current: true },
   { name: "Best Rating", to: "", current: false },
@@ -236,26 +35,33 @@ const filters = [
     ],
   },
   {
+    id: "brand",
+    name: "Brand",
+    options: [
+      { value: "nike", label: "Nike", checked: false },
+      { value: "adidas", label: "Adidas", checked: false },
+      { value: "gucci", label: "Gucci", checked: true },
+      { value: "louis-vuitton", label: "Louis Vuitton", checked: false },
+    ],
+  },
+  {
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: "shoes", label: "Shoes", checked: false },
+      { value: "hand-bags", label: "Hand Bags", checked: false },
+      { value: "shirts", label: "Shirts", checked: true },
+      { value: "pants", label: "Pants", checked: false },
     ],
   },
   {
     id: "size",
     name: "Size",
     options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
+      { value: "ms", label: "Small", checked: false },
+      { value: "md", label: "Medium", checked: false },
+      { value: "lg", label: "Large", checked: false },
+      { value: "xl", label: "X-Large", checked: false },
     ],
   },
 ];
@@ -264,12 +70,15 @@ function classNames(...classNamees) {
   return classNamees.filter(Boolean).join(" ");
 }
 
-export default function ProductList(props) {
+
+
+  
+
+export default function ProductList({category,products,status,error}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const dispatch = useDispatch();
-  const handleAddtocart=(quantity=1)=>{
-    dispatch(addToCart({...products,quantity}))
-  }
+
+
 
   return (
     <>
@@ -423,7 +232,7 @@ export default function ProductList(props) {
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-                {props.category}
+                {category}
               </h1>
 
               <div className="flex items-center">
@@ -568,34 +377,33 @@ export default function ProductList(props) {
                       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                         {products.map((product) => (
                           <div key={product.id}>
-                          <Link to='/products/:id'>
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                              <img
-                                src={product.imageSrc}
-                                alt={product.imageAlt}
-                                className="h-full w-full object-cover object-center group-hover:opacity-75"
-                              />
-                            </div>
+                            <Link to="/products/:id">
+                              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                <img
+                                  src={product.image}
+                                  alt={product.title}
+                                  className="h-full w-full object-cover object-center group-hover:opacity-75"
+                                />
+                              </div>
                             </Link>
                             <h3 className="mt-4 text-sm text-gray-700">
-                              {product.name}
+                              {product.title}
                             </h3>
                             <p className="mt-1 text-lg block font-medium text-gray-900">
                               {product.price}
                             </p>
-                            <button
-                              className="text-white p-2 text-center mr-1 rounded bg-gray-950 hover:bg-gray-700">
-
-                              <h6 >Buy Now</h6> 
+                            <button className="text-white p-2 text-center mr-1 rounded bg-gray-950 hover:bg-gray-700">
+                              <h6>Buy Now</h6>
                             </button>
                             <button
                               className="text-white p-2 text-center rounded ml-1 bg-gray-950 hover:bg-gray-700"
-                              onClick={(quantity=1)=>dispatch(addToCart({...product,quantity}))}
+                              onClick={(quantity = 1) =>
+                                dispatch(addToCart({ ...product, quantity }))
+                              }
                             >
-
-                              <h6 >Add to cart</h6> 
+                              <h6>Add to cart</h6>
                             </button>
-                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>
