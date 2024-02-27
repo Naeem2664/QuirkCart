@@ -8,77 +8,26 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { BiCartAdd } from "react-icons/bi";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/slices/cartSlice";
-import React, { useEffect } from 'react';
-import { fetchProductsThunk } from "../features/slices/productSlice";
-const sortOptions = [
-  { name: "Most Popular", to: "", current: true },
-  { name: "Best Rating", to: "", current: false },
-  { name: "Newest", to: "#", current: false },
-  { name: "Price: Low to High", to: "", current: false },
-  { name: "Price: High to Low", to: "", current: false },
-];
-const filters = [
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
-  {
-    id: "brand",
-    name: "Brand",
-    options: [
-      { value: "nike", label: "Nike", checked: false },
-      { value: "adidas", label: "Adidas", checked: false },
-      { value: "gucci", label: "Gucci", checked: true },
-      { value: "louis-vuitton", label: "Louis Vuitton", checked: false },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "shoes", label: "Shoes", checked: false },
-      { value: "hand-bags", label: "Hand Bags", checked: false },
-      { value: "shirts", label: "Shirts", checked: true },
-      { value: "pants", label: "Pants", checked: false },
-    ],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "ms", label: "Small", checked: false },
-      { value: "md", label: "Medium", checked: false },
-      { value: "lg", label: "Large", checked: false },
-      { value: "xl", label: "X-Large", checked: false },
-    ],
-  },
-];
 
 function classNames(...classNamees) {
   return classNamees.filter(Boolean).join(" ");
 }
 
-
-
-  
-
-export default function ProductList({category,products,status,error}) {
+export default function ProductList({
+  category,
+  products,
+  status,
+  error,
+  sortOptions,
+  filters,
+}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const dispatch = useDispatch();
-
-
 
   return (
     <>
@@ -195,21 +144,21 @@ export default function ProductList({category,products,status,error}) {
                               </h3>
                               <Disclosure.Panel className="pt-6">
                                 <div className="space-y-6">
-                                  {section.options.map((option, optionIdx) => (
+                                  {filters.options.map((option) => (
                                     <div
                                       key={option.value}
                                       className="flex items-center"
                                     >
                                       <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
+                                        id={option.value}
+                                        name={option.value}
                                         defaultValue={option.value}
                                         type="checkbox"
                                         defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                       />
                                       <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                        htmlFor="filtersoption"
                                         className="ml-3 min-w-0 flex-1 text-gray-500"
                                       >
                                         {option.label}
@@ -374,34 +323,29 @@ export default function ProductList({category,products,status,error}) {
                     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                       <h2 className="sr-only">Products</h2>
 
-                      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 grid-cols-2">
                         {products.map((product) => (
-                          <div key={product.id}>
+                          <div
+                            key={product.id}
+                            className="bg-gray-900 p-1 rounded lg:h-96 md:h-80 sm:h-72 h-64 overflow-scroll"
+                          >
                             <Link to="/products/:id">
-                              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                                 <img
-                                  src={product.image}
+                                  src={product.thumbnail}
                                   alt={product.title}
-                                  className="h-full w-full object-cover object-center group-hover:opacity-75"
+                                  className="lg:h-64 md:h-40 sm:h-36 h-32  object-cover object-center group-hover:opacity-75"
                                 />
                               </div>
                             </Link>
-                            <h3 className="mt-4 text-sm text-gray-700">
+                            <p className="mt-1 text-sm text-gray-200">
                               {product.title}
-                            </h3>
-                            <p className="mt-1 text-lg block font-medium text-gray-900">
-                              {product.price}
                             </p>
-                            <button className="text-white p-2 text-center mr-1 rounded bg-gray-950 hover:bg-gray-700">
-                              <h6>Buy Now</h6>
-                            </button>
-                            <button
-                              className="text-white p-2 text-center rounded ml-1 bg-gray-950 hover:bg-gray-700"
-                              onClick={(quantity = 1) =>
-                                dispatch(addToCart({ ...product, quantity }))
-                              }
-                            >
-                              <h6>Add to cart</h6>
+                            <p className="text-sm block font-medium text-gray-100">
+                              Rs. {product.price}
+                            </p>
+                            <button className="text-gray-900 p-2 w-full rounded bg-gray-100 hover:bg-gray-300 flex justify-center items-center">
+                              <BiCartAdd className="text-2xl" />
                             </button>
                           </div>
                         ))}
